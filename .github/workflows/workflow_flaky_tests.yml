@@ -39,22 +39,22 @@ jobs:
 
     steps:
       - name: git clone 
-        run: git clone https://github.com/apache/openwebbeans
+        run: git clone https://github.com/adobe/aem-core-wcm-components
       
       - name: cd
-        run: cd openwebbeans
+        run: cd aem-core-wcm-components
         
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          repository: apache/openwebbeans
-          ref: 424af4bb7285b806d3e3efe5020cd3e440e0a4ff
+          repository: adobe/aem-core-wcm-components
+          ref: 5f29cc86b17b6db36cc617805295eb951b6504a1
       
       - name: test-compile
-        run: mvn test-compile -pl webbeans-impl -am
+        run: mvn test-compile -pl bundles/core -am
       
       - name: test
-        run: mvn -pl webbeans-impl test -Dtest=org.apache.webbeans.test.annotation.binding.BeanCacheKeyUnitTest#testEquals2AnnotationsUnorderedParam
-      
+        run: mvn -pl bundles/core test -Dtest=com.adobe.cq.wcm.core.components.internal.servlets.contentfragment.ElementsDataSourceServletTest#testComponentPathStructured
+  
       - name: flaky-test
-        run: mvn -pl webbeans-impl edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.apache.webbeans.test.annotation.binding.BeanCacheKeyUnitTest#testEquals2AnnotationsUnorderedParam
+        run: mvn -pl bundles/core edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=com.adobe.cq.wcm.core.components.internal.servlets.contentfragment.ElementsDataSourceServletTest#testComponentPathStructured
