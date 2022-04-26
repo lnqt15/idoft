@@ -33,7 +33,7 @@ jobs:
         run: mvn -pl . test -Dtest=org.spdx.compare.TestPackageSheet#testDeclaredLicenseCol
       
       - name: flaky-test
-        run: mvn -pl . edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.spdx.compare.TestPackageSheet#testDeclaredLicenseCol
+        run: mvn -pl . edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.spdx.compare.TestPackageSheet#testDeclaredLicenseCol -DnondexRuns=10
   build_2:
     runs-on: ubuntu-latest
 
@@ -57,6 +57,5 @@ jobs:
         run: mvn -pl . test -Dtest=org.springframework.data.couchbase.core.mapping.MappingCouchbaseConverterTests#idHasMultiplePrefixesAndSuffixesSameOrder
       
       - name: flaky-test
-        run: mvn -pl . edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.springframework.data.couchbase.core.mapping.MappingCouchbaseConverterTests#idHasMultiplePrefixesAndSuffixesSameOrder
-        
+        run: mvn -pl . edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.springframework.data.couchbase.core.mapping.MappingCouchbaseConverterTests#idHasMultiplePrefixesAndSuffixesSameOrder -DnondexRuns=10        
 
