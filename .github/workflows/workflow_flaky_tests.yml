@@ -14,6 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+    
       - name: git clone 
         run: git clone https://github.com/spdx/tools
       
@@ -38,6 +43,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+    
       - name: git clone 
         run: git clone https://github.com/apache/flink
       
