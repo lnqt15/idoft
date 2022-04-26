@@ -15,25 +15,25 @@ jobs:
 
     steps:
       - name: git clone 
-        run: git clone https://github.com/google/guice
+        run: git clone https://github.com/spdx/tools
       
       - name: cd
-        run: cd guice
+        run: cd tools
         
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          repository: google/guice
-          ref: e0f12160dd854bf0106ed94d2a36125bad1b577c
+          repository: spdx/tools
+          ref: cf965bc2fa99e1c5ca23f992f18cef48c08dec9f
       
       - name: test-compile
-        run: mvn test-compile -pl throwingproviders -am
+        run: mvn test-compile -pl . -am
       
       - name: test
-        run: mvn -pl throwingproviders test -Dtest=com.google.inject.throwingproviders.CheckedProvidersTest#testUnsupportedMethods_otherMethod_throwsIllegalArgumentException
+        run: mvn -pl . test -Dtest=org.spdx.compare.TestPackageSheet#testDeclaredLicenseCol
       
       - name: flaky-test
-        run: mvn -pl throwingproviders edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=com.google.inject.throwingproviders.CheckedProvidersTest#testUnsupportedMethods_otherMethod_throwsIllegalArgumentException
+        run: mvn -pl . edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.spdx.compare.TestPackageSheet#testDeclaredLicenseCol
 
 
         
