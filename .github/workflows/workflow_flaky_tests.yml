@@ -20,7 +20,11 @@ jobs:
       - name: cd
         run: cd guice
         
-      - uses: actions/checkout@e0f12160dd854bf0106ed94d2a36125bad1b577c
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          repository: google/guice
+          ref: e0f12160dd854bf0106ed94d2a36125bad1b577c
       
       - name: test-compile
         run: mvn test-compile -pl throwingproviders -am
