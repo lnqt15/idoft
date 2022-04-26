@@ -39,22 +39,22 @@ jobs:
 
     steps:
       - name: git clone 
-        run: git clone https://github.com/Huawei/vCenter_Plugin_DME
+        run: git clone https://github.com/apache/flink
       
       - name: cd
-        run: cd vCenter_Plugin_DME
+        run: cd flink
         
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          repository: Huawei/vCenter_Plugin_DME
-          ref: fa077ef3c8ee052afc01084bc5aaae7c3b4518a4
+          repository: apache/flink
+          ref: 23c9b5ac50d04d28a34a87c78eb2d3331c06b74b
       
       - name: test-compile
-        run: mvn test-compile -pl dmestore-service -am
+        run: mvn test-compile -pl flink-connectors/flink-connector-kafka-base -am
       
       - name: test
-        run: mvn -pl dmestore-service test -Dtest=com.huawei.dmestore.services.DmeAccessServiceImplTest#testAccess
+        run: mvn -pl flink-connectors/flink-connector-kafka-base test -Dtest=org.apache.flink.table.descriptors.KafkaTest#testValidation
   
       - name: flaky-test
-        run: mvn -pl dmestore-service edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=com.huawei.dmestore.services.DmeAccessServiceImplTest#testAccess
+        run: mvn -pl flink-connectors/flink-connector-kafka-base edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=org.apache.flink.table.descriptors.KafkaTest#testValidation
