@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: workflow_flaky_tests
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build_1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: git clone 
+        run: git clone https://github.com/google/guice
+      
+      - name: cd
+        run: cd guice
+        
+      - uses: actions/checkout@e0f12160dd854bf0106ed94d2a36125bad1b577c
+      
+      - name: test-compile
+        run: mvn test-compile -pl throwingproviders -am
+      
+      - name: test
+        run: mvn -pl throwingproviders test -Dtest=com.google.inject.throwingproviders.CheckedProvidersTest#testUnsupportedMethods_otherMethod_throwsIllegalArgumentException
+      
+      - name: flaky-test
+        run: mvn -pl throwingproviders edu.illinois:nondex-maven-plugin:1.1.2:nondex -Dtest=com.google.inject.throwingproviders.CheckedProvidersTest#testUnsupportedMethods_otherMethod_throwsIllegalArgumentException
+
+        
+
